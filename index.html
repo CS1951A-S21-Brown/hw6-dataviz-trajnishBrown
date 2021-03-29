@@ -1,28 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-        <meta charset="utf-8">
-        <title>Assignment 6 &laquo; Data Visualization Dashboard&raquo;</title>
-        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-        <link rel="stylesheet" href="main.css"/>
-        <!--Feel free to add more CSS files as needed-->
-        <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
-    </head>
+    <meta charset="utf-8">
+    <title>Assignment 6 &laquo; Data Visualization Dashboard&raquo;</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css" />
+    <!--Feel free to add more CSS files as needed-->
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <!-- Load d3-cloud -->
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+
+</head>
+
 <body>
     <div class="header">
-        <h3>Assignment 6 &laquo; Data Visualization Dashboard &raquo;</h3>
+        <h3>Assignment 6 &laquo; Football Data Visualization Dashboard &raquo;</h3>
     </div>
     <!--  We included a basic HTML structure for the 3 graphs here. Feel free to change this if you'd like  -->
     <div class="row">
         <div class="col-lg-6">
-            <div id="graph1"></div>
-            <div id="graph2"></div><br/>
+            <div id="graph1"></div><br><br>
+            <div style="margin-left: 190px;">
+                <p style="font-size: larger; margin-left: -45px;">Top 10 countries based on winning percentage (1872 -
+                    2020)
+                </p>
+                <p style="font-size: medium; margin-left: 15px; font-style: italic;">Move your mouse over a circle to
+                    enlarge!</p>
+            </div><br>
+            <div id="graph2"></div><br />
+            <p style="margin-left: 245px; font-size: medium;">(Minimum games played - 500)</p>
         </div>
         <div class="col-lg-6">
+            <div style="margin-left: 200px; margin-top: 50px;">
+                <p style="font-size: larger;">Best picks for 2022 world cup winning team</p>
+                <p style="margin-left: -125px; font-size: medium;">(Based on win percentage in selected year(s) and
+                    minimum 5
+                    world cup games)</p>
+            </div>
+            <div style="display: flex; margin-left: 280px;">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="checkbox2018" checked>
+                    <label class="form-check-label" for="checkbox2018" name="checkbox2018">
+                        2018 WC
+                    </label>
+                </div>
+                <div style="margin-left: 10px;" class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="checkbox2014" checked>
+                    <label class="form-check-label" for="checkbox2014">
+                        2014 WC
+                    </label>
+                </div>
+            </div>
             <div id="graph3"></div>
         </div>
+    </div>
+    <div class="container">
+        <p style="text-align: center; font-size: x-large; font-weight: bold;">Written Questions</p>
+        <div style="font-size: large;">
+            <p><b>Q1:</b> Describe how your dashboard answers the questions presented. You don't have to address every
+                question directly, but should at a high level address the main questions.</p>
+            <p><b>A1:</b> Graph 1 (The horizontal bar chart) draws out the number of international football games played
+                between the years 2016 and 2020. A cleaned form of the football.csv data is iterated over and a count is
+                incremented based on the "year" attribute. In order to cater to persons of varied disabilities,
+                accessibility of the bar chart is addressed by displaying the count as a text label at the end of each
+                bar.<br>An observation extracted from the displayed data is the evident lack of games in 2020 due to the
+                corona-virus pandemic.</p>
+            <p>Graph 2 (The world map) plots markers, extracted from the football.csv dataset, on a country
+                if it falls into the category of Top 10 teams in the world based on winning percentage. Winning
+                percentage for a country is calculated by dividing the number of games won, by the number of games
+                played by that country between the years 1872 to 2020. A threshold of a minimum of 500 games played has
+                been put in place. Accessibility is improved by picking a contrasting color choice for the markers so
+                that it can be easily seen by the colorblind. On hover over a marker, it expands to provide a clearer
+                insight of the country in question.</p>
+            <p>Graph 3 (The word-bubble) is used to depict the best picks for the next FIFA Football World Cup based on
+                winning percentage of teams in the world cups that took place in the years selected. By clicking on the
+                checkboxes, a user is able to toggle the years to be taking into account for our prediction and a new
+                svg is rendered. I threshold of a minimum of 5 world cup games is taken into account. In order to
+                improve accessibility, font size is made large.</p>
+            <p><b>Q2:</b> List 3 reasons why D3 was helpful and improved your visualization.</p>
+            <p><b>A2:</b> D3's powerful visualization engine, and ability to read and crunch data efficiently, makes it a
+                very useful library to use in order to provide insights. It's close coupling with HTML, javascript and
+                SVG's
+                make it easy to use prior knowledge on these topics in order to enhance the way data can be depicted. It
+                works on most modern browsers too! The ability to quickly and efficiently manipulate the DOM makes it
+                easy
+                in fast rendering and debugging capabilities.</p>
+            <p><b>Q3:</b> List 3 reasons why D3 would not be the best tool for creating a visualization.</p>
+            <p><b>A3:</b> D3 is a complicated library to get a hang off, especially when compared with other available
+                data
+                visualizations libraries available in the market. Its learning curve is steep. D3 has a couple of data
+                source limitations, but this disadvantage did not play a role in our dashboard. Strong data privacy is
+                lacking in D3, and data that should not be shared might not be the best choice to work with D3. Creating
+                a
+                visualization in D3 is time consuming and not very easy to get right.</p>
+            <p><b>Q4:</b> Evaluate the accessibility of your dashboard based on the readings in the “Before you begin”
+                section. What kinds of users might find this dashboard accessible and who might have more difficulty?
+                What additional actions might you take to make this dashboard more accessible to all audiences?</p>
+            <p><b>A4:</b> The dashboard has been created with accessibility in mind and various methods have been
+                implemented to ensure it passes accessibility requirements. In accordance with the article "A
+                Comprehensive Guide to Accessible Data Visualization" written by Amanda Miller [1], users with
+                visual impairments are assisted by the written text around each graph which gives a brief summary of
+                what the graph represents. This text can be picked up by screen readers. Thresholds and other
+                factors considered have been explicitly written out in paragraph tags. Counts of bar plots have been
+                stated as text at the end of the plot. Color contrasts between the background, text and plots have
+                been studied and adjusted accordingly in order to cater to those who are colorblind. However, people
+                with severe colorblindness may find the plots tough to understand as there still remains a greater
+                scope for improvements in design and user-experience. Also, technical limitations in the plotting
+                and representation of the data may confuse a lot of people. </p>
+            <p><b>Q5:</b> Reflect on the stages of your design and implementation process when you could have taken
+                steps to make your dashboard more accessible to all audiences. What are some factors that kept you from
+                taking these steps?</p>
+            <p><b>A5:</b> While selecting the color scheme for the dashboard, if a greater time investment and research
+                effort was put in trying to find a more contrasting scheme, the dashboard would have been more
+                accessible to users with even severe forms of colorblindness. One of the factors that led to quick
+                decisions having to be made is due to the steep learning curve I found for D3.js.</p>
+            <div id="references">
+                <p><b>References:</b></p>
+                <p>[1] A Comprehensive Guide to Accessible Data Visualization: </p><a
+                    href="http://www.betterment.com/resources/accessible-data-visualization/">betterment.com/resources/accessible-data-visualization/</a>
+            </div>
+        </div>
+
     </div>
     <!--Feel free to add more JavaScript files as needed-->
     <script type="text/javascript" src="main.js"></script>
 </body>
+
 </html>
